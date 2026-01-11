@@ -2,7 +2,7 @@
 
 ## 開発環境
 
-- Go: `1.24.x`（mise でバージョン固定。必要なら `.mise.toml` を変更）
+- Go:mise でバージョンを固定しています。バージョンは`.mise.toml` を参照してください。
 - タスク実行/ツール管理: [mise](https://mise.jdx.dev/)
 
 ### セットアップ（mise）
@@ -16,20 +16,11 @@
 ### タスク実行
 
 このリポジトリでは、開発用コマンドを mise のタスクとして実行します。
-
-- フォーマット: `mise run fmt`
-- テスト: `mise run test`
-- ビルド: `mise run build`
-- 実行: `mise run run`
-
 タスク定義は `.mise.toml` を参照してください。
 
 ## 環境変数
 
 設定は環境変数で行います。ローカル開発では `.env.example` をコピーして `.env` を作り、必要な値に変更してください。
-
-- `SQLITEDB_GENERATOR_DB_PATH`: 生成/利用する SQLite DB ファイルのパス
-- `SQLITEDB_GENERATOR_OUTPUT_DIR`（任意）: 生成物の出力ディレクトリ
 
 ## コードスタイル（EditorConfig）
 
