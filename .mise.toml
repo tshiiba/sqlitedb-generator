@@ -1,0 +1,21 @@
+[tools]
+go = "1.25.5"
+
+[env]
+_.file = ".env"
+
+[tasks.fmt]
+description = "Format Go code"
+run = "go fmt ./..."
+
+[tasks.test]
+description = "Run tests"
+run = "go test ./..."
+
+[tasks.build]
+description = "Build"
+run = "go build ./..."
+
+[tasks.run]
+description = "Run (requires main package)"
+run = "go run ./..."
