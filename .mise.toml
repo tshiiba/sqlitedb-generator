@@ -19,3 +19,7 @@ run = "go build ./..."
 [tasks.run]
 description = "Run (requires main package)"
 run = "go run ./..."
+
+[tasks.proto-doc]
+description = "Generate protobuf docs (docker + protoc-gen-doc)"
+run = "./scripts/gen-proto-docs.sh"
