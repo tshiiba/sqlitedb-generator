@@ -1,5 +1,7 @@
 # sqlitedb-generator
 
+TSVファイル群から SQLite のDBファイルを生成する小さなジェネレータです。
+
 ## 開発環境
 
 - Go:mise でバージョンを固定しています。バージョンは`.mise.toml` を参照してください。
@@ -35,3 +37,19 @@
 - JetBrains / IntelliJ 系: 多くの製品で標準対応しています（未対応の場合は EditorConfig プラグインを追加してください）
 
 設定の詳細は `.editorconfig` を参照してください。
+
+## 使い方
+
+`./tsv` 配下の `*.tsv` を読み込み、同名のテーブルに取り込んで `out.db` を作成します。
+
+```sh
+go run ./cmd/sqlitedb-generator -in ./tsv -out ./out.db -overwrite -drop -v
+```
+
+### オプション
+
+- `-in` : 入力TSVディレクトリ（デフォルト `./tsv`）
+- `-out` : 出力DBパス（デフォルト `./out.db`）
+- `-overwrite` : 既存のDBファイルを削除して作り直す
+- `-drop` : 既存テーブルを `DROP TABLE IF EXISTS` してから作り直す
+- `-v` : 進捗を表示
