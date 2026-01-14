@@ -53,3 +53,29 @@ go run ./cmd/sqlitedb-generator -in ./tsv -out ./out.db -overwrite -drop -v
 - `-overwrite` : 既存のDBファイルを削除して作り直す
 - `-drop` : 既存テーブルを `DROP TABLE IF EXISTS` してから作り直す
 - `-v` : 進捗を表示
+
+## Protobuf API ドキュメント生成（protoc-gen-doc）
+
+Docker の `pseudomuto/protoc-gen-doc` を使って `.proto` から Markdown を生成できます。
+
+### 生成（mise）
+
+`mise run proto-doc`
+
+### 生成（dockerを直接実行）
+
+```sh
+docker run --rm \
+	--user "$(id -u):$(id -g)" \
+	-v "$PWD/api:/protos" \
+	-v "$PWD/docs/proto:/out" \
+	--entrypoint protoc \
+	pseudomuto/protoc-gen-doc \
+	-I /protos \
+	-I /usr/include \
+	--doc_out=/out \
+	--doc_opt=markdown,api.md \
+	v1/hello.proto
+```
+
+出力先は `docs/proto/api.md` です。
