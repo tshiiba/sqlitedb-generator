@@ -46,7 +46,11 @@ func main() {
 	if err != nil {
 		fatal(err)
 	}
-	defer db.Close()
+	defer func() {
+		if err := db.Close(); err != nil {
+			fmt.Fprintf(os.Stderr, "warning: close db error: %v\n", err)
+		}
+	}()
 
 	// Make sure we can talk to SQLite.
 	if err := db.Ping(); err != nil {

@@ -127,7 +127,11 @@ func readHeader(tsvPath string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			fmt.Fprintf(os.Stderr, "warning: close file error: %v\n", err)
+		}
+	}()
 
 	r := newTSVReader(f)
 	record, err := r.Read()
@@ -146,7 +150,11 @@ func inferColumnTypes(tsvPath string, colCount int) ([]colType, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			fmt.Fprintf(os.Stderr, "warning: close file error: %v\n", err)
+		}
+	}()
 
 	r := newTSVReader(f)
 	// discard header
@@ -274,7 +282,11 @@ func streamInsertTSV(ctx context.Context, stmt *sql.Stmt, tsvPath string, colCou
 	if err != nil {
 		return 0, err
 	}
-	defer f.Close()
+	defer func() {
+		if err := f.Close(); err != nil {
+			fmt.Fprintf(os.Stderr, "warning: close file error: %v\n", err)
+		}
+	}()
 
 	r := newTSVReader(f)
 	// discard header
